@@ -26,7 +26,7 @@ require 'zip'
 
 Redmine::Plugin.register :redmine_dmsf do
   name 'DMSF'
-  author 'Vít Jonáš / Daniel Munn / Karel Pičman'
+  author 'Vít Jonáš, Daniel Munn, Karel Pičman, Gregory Van der Steen'
   description 'Document Management System Features'
   version '1.5.8'
   url 'http://www.redmine.org/plugins/dmsf'
