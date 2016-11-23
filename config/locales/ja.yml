@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ja:
-  dmsf: DMSF
+  dmsf: 文書管理ファイル
   label_dmsf_file_plural: 文書管理ファイル
   label_dmsf_file_revision_plural: 文書管理ファイルリビジョン
   label_dmsf_file_revision_access_plural: 文書管理ファイルアクセス

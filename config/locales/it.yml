@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 it: # Italian strings thx 2 Matteo Arceci!
-  dmsf: DMSF
+  dmsf: Documenti
   label_dmsf_file_plural: Documenti
   label_dmsf_file_revision_plural: Revisioni al documento
   label_dmsf_file_revision_access_plural: Accessi al documento
@@ -84,7 +84,7 @@ it: # Italian strings thx 2 Matteo Arceci!
   title_lock_file: Blocca per evitare modifiche degli altri membri
   title_download_checked: Download selezionati in archivio Zip
   title_send_checked_by_email: Selezionati spediti per email
-  link_user_preferences: Le tue preferenze DMSF di progetto
+  link_user_preferences: Le tue preferenze documenti (DMSF) di progetto
   heading_send_documents_by_email: Documenti spediti per email
   label_email_from: Da
   label_email_to: A
@@ -237,7 +237,7 @@ it: # Italian strings thx 2 Matteo Arceci!
   label_dmsf_workflow_step_plural: Passi
   label_dmsf_workflow_approval: Approvazione
   label_dmsf_workflow_approval_plural: Approvazioni
-  label_dmsf: DMSF
+  label_dmsf: Documenti
   label_dmsf_wokflow_action_approve: Approva
   label_dmsf_wokflow_action_reject: Rifiuta
   label_dmsf_wokflow_action_delegate: Delega a 
