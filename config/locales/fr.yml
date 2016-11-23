@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 fr:
-  dmsf: DMSF
+  dmsf: Fichiers
   label_dmsf_file_plural: Fichiers
   label_dmsf_file_revision_plural: Révisions du document
   label_dmsf_file_revision_access_plural: Accès au document
@@ -84,7 +84,7 @@ fr:
   title_lock_file: "Verrouiller afin d'empêcher les modifications du document"
   title_download_checked: Télécharger les fichiers sélectionnés au format zip
   title_send_checked_by_email: Transmettre les fichiers sélectionnés par mail
-  link_user_preferences: Préférences personnelles du module DMSF
+  link_user_preferences: Préférences personnelles du module fichiers (DMSF)
   heading_send_documents_by_email: Transmettre les documents par mail
   label_email_from: De
   label_email_to: A
@@ -173,7 +173,7 @@ fr:
   error_file_can_not_be_created: "Le fichier n'a pas pu être enregistré dans le répertoire de stockage"
   error_wrong_zip_encoding: Mauvais jeu de caractères pour la transformation du nom du ZIP
   warning_xapian_not_available: Le module Xapian est indisponible
-  menu_dmsf: DMSF
+  menu_dmsf: Fichiers
   label_physical_file_delete: Suppression des fichiers
   user_is_not_project_member: "Vous n'êtes pas un membre du projet"
   heading_access_downloads_emails: Téléchargement / Envoi par mail
@@ -237,7 +237,7 @@ fr:
   label_dmsf_workflow_step_plural: Etapes
   label_dmsf_workflow_approval: Approbation
   label_dmsf_workflow_approval_plural: Approbations
-  label_dmsf: DMSF
+  label_dmsf: Fichiers
   label_dmsf_wokflow_action_approve: Approuver
   label_dmsf_wokflow_action_reject: Rejeter
   label_dmsf_wokflow_action_delegate: Déléguer à

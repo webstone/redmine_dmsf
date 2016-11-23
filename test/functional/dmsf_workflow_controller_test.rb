@@ -130,7 +130,7 @@ class DmsfWorkflowsControllerTest < RedmineDmsf::Test::TestCase
   def test_authorization_no_module
     # Without the module
     @role_manager.add_permission! :file_manipulation
-    @project1.disable_module!(:dmsf)
+    @project1.disable_module!(:project_module_dmsf)
     get :index, :project_id => @project1.id
     assert_response :forbidden
   end

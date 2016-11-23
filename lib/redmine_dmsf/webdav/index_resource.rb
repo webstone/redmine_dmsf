@@ -26,7 +26,7 @@ module RedmineDmsf
       def children
         unless @projects
           @projects = []
-          Project.select(:identifier).has_module(:dmsf).where(
+          Project.select(:identifier).has_module(:project_module_dmsf).where(
             Project.allowed_to_condition(
               User.current, :view_dmsf_folders)).order('lft').all.each do |p|
             @projects << child(p.identifier)

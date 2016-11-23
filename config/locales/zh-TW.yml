@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 zh-TW:
-  dmsf: 文件總管
+  dmsf: 文件檔案
   label_dmsf_file_plural: 文件檔案
   label_dmsf_file_revision_plural: Document revisions
   label_dmsf_file_revision_access_plural: Document accesses
@@ -173,7 +173,7 @@ zh-TW:
   error_file_can_not_be_created: 在存儲目錄裡，無法建立檔案。
   error_wrong_zip_encoding: 不正確的Zip encoding
   warning_xapian_not_available: Xapian not available
-  menu_dmsf: 文件總管
+  menu_dmsf: 文件檔案
   label_physical_file_delete: 永久刪除檔案
   user_is_not_project_member: 您不是專案的成員之一
   heading_access_downloads_emails: 下載/電子郵件
@@ -208,7 +208,7 @@ zh-TW:
   parent_directory: 上層目錄
   note_webdav: "Webdav 啟用後，可在下列網址被找到: %{protocol}://%{domain}/dmsf/webdav/[project identifier]"
   label_webdav: Webdav功能
-  label_dmsf_plural: "複制文件總管的檔案和資料夾。 ( 資料夾: %{folders} 檔案: %{files} )"
+  label_dmsf_plural: "複制文件檔案的檔案和資料夾。 ( 資料夾: %{folders} 檔案: %{files} )"
 
   warning_folder_already_locked: 這個資料夾己經被鎖定了
   notice_folder_locked: 這個資料夾己經成功地鎖定了。
@@ -237,7 +237,7 @@ zh-TW:
   label_dmsf_workflow_step_plural: 步驟
   label_dmsf_workflow_approval: 批准
   label_dmsf_workflow_approval_plural: 批准
-  label_dmsf: 文件總管
+  label_dmsf: 文件檔案
   label_dmsf_wokflow_action_approve: 批准
   label_dmsf_wokflow_action_reject: 拒絕
   label_dmsf_wokflow_action_delegate: 委派給

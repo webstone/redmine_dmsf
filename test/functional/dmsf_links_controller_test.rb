@@ -96,14 +96,14 @@ class DmsfLinksControllerTest < RedmineDmsf::Test::TestCase
   
   def test_authorize_member_no_module
     # Without the module
-    @project1.disable_module!(:dmsf)    
+    @project1.disable_module!(:project_module_dmsf)
     get :new, :project_id => @project1.id
     assert_response :forbidden    
   end
   
   def test_authorize_forbidden
     # Without permissions
-    @project1.enable_module!(:dmsf)
+    @project1.enable_module!(:project_module_dmsf)
     @role_manager.remove_permission! :file_manipulation
     get :new, :project_id => @project1.id
     assert_response :forbidden    

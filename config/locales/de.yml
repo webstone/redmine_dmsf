@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 de:
-  dmsf: DMS
-  label_dmsf_file_plural: DMS
+  dmsf: Dokumente
+  label_dmsf_file_plural: Dokumente
   label_dmsf_file_revision_plural: Dokumenteversion
   label_dmsf_file_revision_access_plural: Dokumentezugriffe
   warning_no_entries_selected: Keine Einträge ausgewählt
@@ -84,7 +84,7 @@ de:
   title_lock_file: Sperre um Änderungen anderer Nutzer zu verhindern
   title_download_checked: Download der ausgewählten Dateien in einem ZIP-Archiv
   title_send_checked_by_email: Sende gewählte Dateien per Email
-  link_user_preferences: Deine DMS Projekt Einstellungen
+  link_user_preferences: Deine Dokumente (DMS) Projekt Einstellungen
   heading_send_documents_by_email: Sende Dateien per Email
   label_email_from: Von
   label_email_to: An
@@ -173,7 +173,7 @@ de:
   error_file_can_not_be_created: Datei kann nicht in dem gewählten Ordner erstellt werden.
   error_wrong_zip_encoding: Falsche ZIP-Kodierung
   warning_xapian_not_available: Xapian steht nicht zur Verfügung
-  menu_dmsf: DMS
+  menu_dmsf: Dokumente
   label_physical_file_delete: Physisches Dateilöschen
   user_is_not_project_member: Du bist kein Projektmitglied
   heading_access_downloads_emails: Downloads oder Emailversand
@@ -237,7 +237,7 @@ de:
   label_dmsf_workflow_step_plural: Schritte
   label_dmsf_workflow_approval: Genehmigung
   label_dmsf_workflow_approval_plural: Genehmigungen
-  label_dmsf: DMS
+  label_dmsf: Dokumente
   label_dmsf_wokflow_action_approve: Genehmigen
   label_dmsf_wokflow_action_reject: Ablehnen
   label_dmsf_wokflow_action_delegate: Deligieren an
