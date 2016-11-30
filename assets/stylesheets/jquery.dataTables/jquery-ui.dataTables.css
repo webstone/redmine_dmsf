@@ -163,10 +163,6 @@ table.display tr.heading2 td {
 	border-bottom: 1px solid #aaa;
 }
 
-table.display td {
-	padding: 3px 10px;
-}
-
 table.display td.center {
 	text-align: center;
 }
@@ -332,25 +328,25 @@ table.display tr.odd.row_selected td {
  */
 /* For the standard odd/even */
 tr.odd td.sorting_1 {
-	background: url('images/highlight.png') repeat;
+	background-color: #fcfcfc;
 }
 
 tr.odd td.sorting_2 {
-	background: url('images/highlight.png') repeat;
+	background-color: #fcfcfc;
 }
 
 tr.odd td.sorting_3 {
-	background: url('images/highlight.png') repeat;
+	background-color: #fcfcfc;
 }
 
 tr.even td.sorting_1 {
-	background: url('images/highlight.png') repeat;
+	background-color: #f7f7f7;
 }
 
 tr.even td.sorting_2 {
-	background: url('images/highlight.png') repeat;
+	background-color: #f7f7f7;
 }
 
 tr.even td.sorting_3 {
-	background: url('images/highlight.png') repeat;
+	background-color: #f7f7f7;
 }
