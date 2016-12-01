@@ -27,42 +27,42 @@
 ################################################################################################
 
 # Redmine installation directory
-$redmine_root = '/opt/redmine'
+$redmine_root = '/Users/gvdsteen/IdeaProjects/Extranet'
 
 # DMSF document location $redmine_root/$files
-$files = 'dmsf'
+$files = 'files/dmsf'
 
 # scriptindex binary path 
-$scriptindex  = '/usr/bin/scriptindex'
+$scriptindex  = '/usr/local/bin/scriptindex'
 
 # omindex binary path
-$omindex      = '/usr/bin/omindex'
+$omindex      = '/usr/local/bin/omindex'
 
 # Directory containing xapian databases for omindex (Attachments indexing)
-$dbrootpath   = '/var/tmp/dmsf-index'
+$dbrootpath   = '/Users/gvdsteen/IdeaProjects/Extranet/files/dmsf_index'
 
 # Verbose output, values of 0 no verbose, greater than 0 verbose output
-$verbose      = 0
+$verbose      = 1
 
 # Define stemmed languages to index attachments Eg. [ 'english', 'italian', 'spanish' ]
 # Repository database will be always indexed in english
 # Available languages are danish dutch english finnish french german german2 hungarian italian kraaij_pohlmann lovins norwegian porter portuguese romanian russian spanish swedish turkish:  
-$stem_langs	= ['english']
+$stem_langs	= [ 'english', 'dutch' ]
 
 # Project identifiers that will be indexed eg. [ 'prj_id1', 'prj_id2' ]
-$projects	= [ 'prj_id1', 'prj_id2' ]
+$projects	= []
 
 # Temporary directory for indexing, it can be tmpfs
 $tempdir	= '/tmp'
 
 # Binaries for text conversion
-$pdftotext = '/usr/bin/pdftotext -enc UTF-8'
-$antiword	 = '/usr/bin/antiword'
-$catdoc		 = '/usr/bin/catdoc'
-$xls2csv	 = '/usr/bin/xls2csv'
-$catppt		 = '/usr/bin/catppt'
+$pdftotext = '/usr/local/bin/pdftotext -enc UTF-8'
+$antiword	 = '/usr/local/bin/antiword'
+$catdoc		 = '/usr/local/bin/catdoc'
+$xls2csv	 = '/usr/local/bin/xls2csv'
+$catppt		 = '/usr/local/bin/catppt'
 $unzip		 = '/usr/bin/unzip -o'
-$unrtf		 = '/usr/bin/unrtf -t text 2>/dev/null'
+$unrtf		 = '/usr/local/bin/unrtf -t text 2>/dev/null'
 
 ################################################################################################
 # END Configuration parameters
