@@ -27,19 +27,19 @@
 ################################################################################################
 
 # Redmine installation directory
-$redmine_root = '/Users/gvdsteen/IdeaProjects/Extranet'
+$redmine_root = '/home/addow/IdeaProjects/Extranet'
 
 # DMSF document location $redmine_root/$files
 $files = 'files/dmsf'
 
 # scriptindex binary path 
-$scriptindex  = '/usr/local/bin/scriptindex'
+$scriptindex  = '/usr/bin/scriptindex'
 
 # omindex binary path
-$omindex      = '/usr/local/bin/omindex'
+$omindex      = '/usr/bin/omindex'
 
 # Directory containing xapian databases for omindex (Attachments indexing)
-$dbrootpath   = '/Users/gvdsteen/IdeaProjects/Extranet/files/dmsf_index'
+$dbrootpath   = '/home/addow/IdeaProjects/Extranet/files/dmsf_index'
 
 # Verbose output, values of 0 no verbose, greater than 0 verbose output
 $verbose      = 1
@@ -56,13 +56,13 @@ $projects	= []
 $tempdir	= '/tmp'
 
 # Binaries for text conversion
-$pdftotext = '/usr/local/bin/pdftotext -enc UTF-8'
-$antiword	 = '/usr/local/bin/antiword'
-$catdoc		 = '/usr/local/bin/catdoc'
-$xls2csv	 = '/usr/local/bin/xls2csv'
-$catppt		 = '/usr/local/bin/catppt'
+$pdftotext = '/usr/bin/pdftotext -enc UTF-8'
+$antiword	 = '/usr/bin/antiword'
+$catdoc		 = '/usr/bin/catdoc'
+$xls2csv	 = '/usr/bin/xls2csv'
+$catppt		 = '/usr/bin/catppt'
 $unzip		 = '/usr/bin/unzip -o'
-$unrtf		 = '/usr/local/bin/unrtf -t text 2>/dev/null'
+$unrtf		 = '/usr/bin/unrtf -t text 2>/dev/null'
 
 ################################################################################################
 # END Configuration parameters
