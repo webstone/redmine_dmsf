@@ -2,7 +2,7 @@
 #
 # Redmine plugin for Document Management System "Features"
 #
-# Copyright (C) 2011-16 Karel Pičman <karel.picman@kontron.com>
+# Copyright (C) 2011-17 Karel Pičman <karel.picman@kontron.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,6 +25,12 @@ class DmsfLinksController < ApplicationController
   before_filter :find_model_object, :only => [:destroy, :restore]
   before_filter :find_link_project
   before_filter :authorize
+
+  def initialize
+    @dmsf_link = nil
+    @target_folder_id = nil
+    super
+  end
 
   def new
     @dmsf_link = DmsfLink.new
