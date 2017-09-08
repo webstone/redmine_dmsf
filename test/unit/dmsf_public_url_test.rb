@@ -2,8 +2,7 @@
 #
 # Redmine plugin for Document Management System "Features"
 #
-# Copyright (C) 2012    Daniel Munn <dan.munn@munnster.co.uk>
-# Copyright (C) 2011-16 Karel Pičman <karel.picman@kontron.com>
+# Copyright (C) 2011-17 Karel Pičman <karel.picman@lbcfree.net>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,26 +20,37 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class DmsfWebdavPostTest < RedmineDmsf::Test::IntegrationTest
-
-  fixtures :users, :email_addresses
+class DmsfPublicUrlsTest < RedmineDmsf::Test::UnitTest
+  
+  fixtures :dmsf_files, :dmsf_file_revisions, :dmsf_public_urls, :users
 
   def setup
-    @admin = credentials 'admin'
-    Setting.plugin_redmine_dmsf['dmsf_webdav'] = '1'
-    Setting.plugin_redmine_dmsf['dmsf_webdav_strategy'] = 'WEBDAV_READ_WRITE'    
+    @file1 = DmsfFile.find_by_id 1
+    assert_not_nil @file1
+    @dmsf_public_url1 = DmsfPublicUrl.find_by_id 1
+    assert_not_nil @dmsf_public_url1
+    @user2 = User.find_by_id 2
+    assert_not_nil @user2
   end
   
-  # Test that any post request is authenticated
-  def test_post_request_authenticated
-    post '/dmsf/webdav/'
-    assert_response 401 # 401 Unauthorized
+  def test_truth
+    assert_kind_of DmsfFile, @file1
+    assert_kind_of DmsfPublicUrl, @dmsf_public_url1
+    assert_kind_of User, @user2
+  end
+  
+  def test_create
+    url = DmsfPublicUrl.new
+    url.dmsf_file = @file1
+    url.user = @user2
+    url.expire_at = DateTime.now() + 1.day
+    assert url.save, url.errors.full_messages.to_sentence
+    assert_not_nil url.token
+  end
+   
+  def test_belongs_to_file
+    @file1.destroy
+    assert_nil DmsfPublicUrl.find_by_id 1
   end
 
-  # Test post is not implemented
-  def test_post_not_implemented
-    post '/dmsf/webdav/', nil, @admin
-    assert_response :error # 501 Not Implemented
-  end
-  
 end

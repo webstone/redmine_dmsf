@@ -3,7 +3,7 @@
 # Redmine plugin for Document Management System "Features"
 #
 # Copyright (C) 2012    Daniel Munn <dan.munn@munnster.co.uk>
-# Copyright (C) 2011-16 Karel Pičman <karel.picman@kontron.com>
+# Copyright (C) 2011-17 Karel Pičman <karel.picman@kontron.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../../../test_helper', __FILE__)
 
 class DmsfWebdavHeadTest < RedmineDmsf::Test::IntegrationTest
 
@@ -32,8 +32,12 @@ class DmsfWebdavHeadTest < RedmineDmsf::Test::IntegrationTest
     @project1 = Project.find_by_id 1
     @project2 = Project.find_by_id 2
     Setting.plugin_redmine_dmsf['dmsf_webdav'] = '1'
-    Setting.plugin_redmine_dmsf['dmsf_webdav_strategy'] = 'WEBDAV_READ_WRITE'    
-    DmsfFile.storage_path = File.expand_path '../../fixtures/files', __FILE__
+    Setting.plugin_redmine_dmsf['dmsf_webdav_strategy'] = 'WEBDAV_READ_WRITE'
+    # Temporarily enable project names
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    @project1_uri = URI.encode(RedmineDmsf::Webdav::ProjectResource.create_project_name(@project1), /\W/)    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = false    
+    DmsfFile.storage_path = File.expand_path '../../../fixtures/files', __FILE__
     User.current = nil    
   end
   
@@ -52,6 +56,34 @@ class DmsfWebdavHeadTest < RedmineDmsf::Test::IntegrationTest
     head "/dmsf/webdav/#{@project1.identifier}", nil, @admin
     assert_response :success
     check_headers_exist
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      head "/dmsf/webdav/#{@project1.identifier}", nil, @admin
+      assert_response 404
+      head "/dmsf/webdav/#{@project1_uri}", nil, @admin
+      assert_response :success
+    end
+  end
+
+  def test_head_responds_anonymous_msoffice_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+    assert_response :success
+    check_headers_exist
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      head "/dmsf/webdav/#{@project1.identifier}", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+      assert_response 404
+      head "/dmsf/webdav/#{@project1_uri}", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+      assert_response :success
+    end
+  end
+
+  def test_head_responds_anonymous_other_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}", nil, {:HTTP_USER_AGENT => 'Other'}
+    assert_response 401
+    check_headers_dont_exist
   end
 
   # Note:
@@ -63,6 +95,34 @@ class DmsfWebdavHeadTest < RedmineDmsf::Test::IntegrationTest
     head "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, @admin
     assert_response :success
     check_headers_exist # Note it'll allow 1 out of the 3 expected to fail
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      head "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, @admin
+      assert_response 404
+      head "/dmsf/webdav/#{@project1_uri}/test.txt", nil, @admin
+      assert_response :success
+    end
+  end
+
+  def test_head_responds_to_file_anonymous_msoffice_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+    assert_response :success
+    check_headers_exist # Note it'll allow 1 out of the 3 expected to fail
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      head "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+      assert_response 404
+      head "/dmsf/webdav/#{@project1_uri}/test.txt", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+      assert_response :success
+    end
+  end
+
+  def test_head_responds_to_file_anonymous_other_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, {:HTTP_USER_AGENT => 'Other'}
+    assert_response 401
+    check_headers_dont_exist
   end
 
   def test_head_fails_when_file_not_found
@@ -71,9 +131,33 @@ class DmsfWebdavHeadTest < RedmineDmsf::Test::IntegrationTest
     check_headers_dont_exist
   end
   
+  def test_head_fails_when_file_not_found_anonymous_msoffice_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}/not_here.txt", nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+    assert_response :missing
+    check_headers_dont_exist
+  end
+  
+  def test_head_fails_when_file_not_found_anonymous_other_user_agent
+    head "/dmsf/webdav/#{@project1.identifier}/not_here.txt", nil, {:HTTP_USER_AGENT => 'Other'}
+    assert_response 401
+    check_headers_dont_exist
+  end
+  
   def test_head_fails_when_folder_not_found
     head '/dmsf/webdav/folder_not_here', nil, @admin
     assert_response :missing
+    check_headers_dont_exist
+  end
+
+  def test_head_fails_when_folder_not_found_anonymous_msoffice_user_agent
+    head '/dmsf/webdav/folder_not_here', nil, {:HTTP_USER_AGENT => 'Microsoft Office Word 2014'}
+    assert_response :missing
+    check_headers_dont_exist
+  end
+
+  def test_head_fails_when_folder_not_found_anonymous_other_user_agent
+    head '/dmsf/webdav/folder_not_here', nil, {:HTTP_USER_AGENT => 'Other'}
+    assert_response 401
     check_headers_dont_exist
   end
 

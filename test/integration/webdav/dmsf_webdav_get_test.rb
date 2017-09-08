@@ -3,7 +3,7 @@
 # Redmine plugin for Document Management System "Features"
 #
 # Copyright (C) 2012    Daniel Munn <dan.munn@munnster.co.uk>
-# Copyright (C) 2011-16 Karel Pičman <karel.picman@kontron.com>
+# Copyright (C) 2011-17 Karel Pičman <karel.picman@kontron.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../../../test_helper', __FILE__)
 
 class DmsfWebdavGetTest < RedmineDmsf::Test::IntegrationTest
 
@@ -34,7 +34,8 @@ class DmsfWebdavGetTest < RedmineDmsf::Test::IntegrationTest
     @role = Role.find_by_id 1 # Manager
     Setting.plugin_redmine_dmsf['dmsf_webdav'] = '1'
     Setting.plugin_redmine_dmsf['dmsf_webdav_strategy'] = 'WEBDAV_READ_WRITE'
-    DmsfFile.storage_path = File.expand_path '../../fixtures/files', __FILE__
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = false
+    DmsfFile.storage_path = File.expand_path '../../../fixtures/files', __FILE__
     User.current = nil
   end
 
@@ -62,13 +63,22 @@ class DmsfWebdavGetTest < RedmineDmsf::Test::IntegrationTest
   def test_should_list_dmsf_enabled_project
     get '/dmsf/webdav', nil, @admin
     assert_response :success
-    assert !response.body.match(@project1.name).nil?, "Expected to find project #{@project1.name} in return data"
+    assert !response.body.match(@project1.identifier).nil?, "Expected to find project #{@project1.identifier} in return data"
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      project1_uri = RedmineDmsf::Webdav::ProjectResource.create_project_name(@project1)
+      get '/dmsf/webdav', nil, @admin
+      assert_response :success
+      assert_no_match @project1.identifier, response.body
+      assert_match project1_uri, response.body
+    end
   end
 
   def test_should_not_list_non_dmsf_enabled_project
     get '/dmsf/webdav', nil, @jsmith
     assert_response :success
-    assert response.body.match(@project2.name).nil?, "Unexpected find of project #{@project2.name} in return data"
+    assert response.body.match(@project2.identifier).nil?, "Unexpected find of project #{@project2.identifier} in return data"
   end
 
   def test_should_return_status_404_when_project_does_not_exist
@@ -83,11 +93,17 @@ class DmsfWebdavGetTest < RedmineDmsf::Test::IntegrationTest
   end
 
   def test_download_file_from_dmsf_enabled_project
-    #@project1.enable_module! :dmsf # Flag module enabled
     get "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, @admin
     assert_response :success
-    assert_equal response.body, '1234',
-      "File downloaded with unexpected contents: '#{response.body}'"
+    
+    Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] = true
+    if Setting.plugin_redmine_dmsf['dmsf_webdav_use_project_names'] == true
+      project1_uri = URI.encode(RedmineDmsf::Webdav::ProjectResource.create_project_name(@project1), /\W/)
+      get "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, @admin
+      assert_response 404
+      get "/dmsf/webdav/#{project1_uri}/test.txt", nil, @admin
+      assert_response :success
+    end
   end
 
   def test_should_list_dmsf_contents_within_project
@@ -135,8 +151,6 @@ class DmsfWebdavGetTest < RedmineDmsf::Test::IntegrationTest
     @role.add_permission! :view_dmsf_files
     get "/dmsf/webdav/#{@project1.identifier}/test.txt", nil, @jsmith
     assert_response :success
-    assert_equal response.body, '1234',
-      "File downloaded with unexpected contents: '#{response.body}'"
   end
 
 end
