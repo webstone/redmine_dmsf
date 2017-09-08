@@ -173,13 +173,8 @@ de:
   error_file_can_not_be_created: Datei kann nicht in dem gewählten Ordner erstellt werden.
   error_wrong_zip_encoding: Falsche ZIP-Kodierung
   warning_xapian_not_available: Xapian steht nicht zur Verfügung
-<<<<<<< HEAD
   menu_dmsf: Dokumente
-  label_physical_file_delete: Physisches Dateilöschen
-=======
-  menu_dmsf: DMS
   label_physical_file_delete: Datei physisch löschen
->>>>>>> branch-1.5.9
   user_is_not_project_member: Du bist kein Projektmitglied
   heading_access_downloads_emails: Downloads oder Emailversand
   heading_access_first: Erste
